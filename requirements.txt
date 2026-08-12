@@ -1,0 +1,31 @@
+# Versions are pinned exactly EXCEPT torch, and that exception is deliberate.
+# Colab ships torch 2.11 as of this revision. Pinning 2.4.1 here would be a pin
+# nobody runs: downgrading torch on Colab also downgrades the CUDA stack and
+# routinely breaks the runtime. The version that actually produced each number is
+# recorded per-run in the provenance record (utils/determinism.py::Provenance), so
+# a reviewer can check it rather than trust this file.
+torch>=2.4,<3          # exact version recorded per run; 2.11.0 used for the reported results
+torchvision>=0.19
+numpy==1.26.4
+scipy==1.13.1
+pandas==2.2.2
+Pillow==10.4.0
+matplotlib==3.9.2
+hydra-core==1.3.2
+omegaconf==2.3.0
+wandb==0.17.7
+optuna==3.6.1
+lpips==0.1.4
+fvcore==0.1.5.post20221221
+python-docx==1.1.2
+GitPython==3.1.43          # not required by the pipeline; convenience for inspecting history
+pytest==8.3.2
+tqdm==4.66.5
+
+# Required to reproduce the manuscript's generator. Pinned because the released
+# weights are tied to this package version. Its metadata predates Python 3.12, so
+# it must be installed as:
+#   pip install --no-deps --ignore-requires-python steganogan==0.1.3
+steganogan==0.1.3
+imageio                # steganogan runtime dep, not declared usably
+reedsolo               # steganogan runtime dep (error-correcting payload codec)
